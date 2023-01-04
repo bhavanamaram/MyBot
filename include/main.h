@@ -80,6 +80,8 @@ void opcontrol(void);
 #include "subsytems/flywheel.hpp"
 #include "subsytems/globals.hpp"
 #include "subsytems/expansion.hpp"
+#include "subsytems/auton.hpp"
+#include "subsytems/autonFunctions.hpp"
 //#include <iostream>
 #endif
 
