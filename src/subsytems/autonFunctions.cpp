@@ -4,11 +4,11 @@
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    intakeMotor.moveVelocity(600); //move the roller at max speed
+    intakeMotor.moveVelocity(300); //move the roller at max speed
     pros::delay(500); //wait half a second to allow roller to spin to our color 
     leftDrive.moveVelocity(0);
     rightDrive.moveVelocity(0);
-    rightDrive.moveVelocity(0); //cut everyting besides flywheel
+    intakeMotor.moveVelocity(0); //cut everyting besides flywheel
 }
 void driveForward(double distance) {
     okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.75, 0.01, 0.01); //create a new drive object with specified pid
@@ -45,6 +45,6 @@ intakeMotor.moveVelocity(0);
 }
 void indexLast(){
     intakeMotor.moveVelocity(-600);
-pros::delay(500); //index for half a second due to this being the last disc in the stack
-intakeMotor.moveVelocity(0);
+    pros::delay(500); //index for half a second due to this being the last disc in the stack
+    intakeMotor.moveVelocity(0);
 }

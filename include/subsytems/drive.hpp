@@ -10,4 +10,5 @@ extern MotorGroup leftDrive;
 extern MotorGroup rightDrive;
 extern std::shared_ptr<OdomChassisController> drive;
 extern Controller controller;
+extern int state;
 void updateDrive();

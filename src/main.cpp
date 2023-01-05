@@ -50,7 +50,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	// updateAuton();
+	updateAuton();
 }
 
 /**
@@ -74,7 +74,7 @@ void opcontrol() {
 // updateExpansion();
 updateDrive();
 updateFlywheel();
-// updateIntake();
+updateIntake();
 rate.delay(100_Hz);
 	}
 }

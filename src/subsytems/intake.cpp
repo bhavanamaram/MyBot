@@ -4,10 +4,11 @@
 Motor intakeMotor(16, true, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees);
 void updateIntake(){
     if (controller.getDigital(ControllerDigital::R1) == 1){
-    intakeMotor.moveVelocity(600); //intake when positive
-    }else if( controller.getDigital(ControllerDigital::R2)==1){
+        intakeMotor.moveVelocity(600); //intake when positive
+    }else if (controller.getDigital(ControllerDigital::R2) == 1){
         intakeMotor.moveVelocity(-600); //index/outake when negitive
-    }else{
+    }
+    else{
         intakeMotor.moveVelocity(0);// stop if there is no input
     }
 }

@@ -2,6 +2,7 @@
 // #include "drive.hpp"  
 #include "okapi/api/odometry/point.hpp"
 using namespace okapi;
+int state=1; //state stores the brake mode of the drive where 1 is coast(default) and 2 is held 
 Motor rightFront(18, false, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees);// motor for the front(drive)
 Motor rightTop(1, true, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees);// the right motor on he top, back (drive)
 Motor rightBottom(2, false, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees);// right motor on the bottom,back (drive)
@@ -33,14 +34,16 @@ MotorGroup rightDrive({rightFront,rightTop,rightBottom});//define the left side 
 
     // drive -> getModel() -> tank(-translate1.power, -translate1.power);
     
-    drive -> getModel() -> arcade(controller.getAnalog(ControllerAnalog::leftY), -controller.getAnalog((ControllerAnalog::leftX)));
+    drive -> getModel() -> arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog((ControllerAnalog::leftX)));
     if (controller.getDigital(ControllerDigital::X) == 1){
       leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
       rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
+      state=2;
     }
     else if (controller.getDigital(ControllerDigital::Y) == 1){
       leftDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
       rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
+      state=1;
     }
  
   }

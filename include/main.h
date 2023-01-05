@@ -82,6 +82,7 @@ void opcontrol(void);
 #include "subsytems/expansion.hpp"
 #include "subsytems/auton.hpp"
 #include "subsytems/autonFunctions.hpp"
+#include "subsytems/intake.hpp"
 //#include <iostream>
 #endif
 
