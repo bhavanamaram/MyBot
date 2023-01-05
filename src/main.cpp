@@ -71,7 +71,7 @@ void opcontrol() {
 	okapi::Rate rate;
 // start();
 // stop();
-// updateExpansion();
+updateExpansion();
 updateDrive();
 updateFlywheel();
 updateIntake();
