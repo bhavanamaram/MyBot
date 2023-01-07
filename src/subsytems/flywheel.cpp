@@ -8,6 +8,7 @@ tapping L2 toggles flywheel at 350 rpm
 bool toggle=false; //toggles the motor on and off
 bool held=false;
 bool lock=false;//prevents the toggle spam (stuttering of the motor which is damaging)
+bool reverse=false;
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
 void updateFlywheel(){
     
@@ -35,13 +36,24 @@ void updateFlywheel(){
          leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
          rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold); //set to hold to prevent moving while shooting 
     }
+    
     else if(!toggle && held==false){
         flywheel.moveVelocity(0); //stop the flywheel if toggle is off
         if(state==1){
             leftDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
       rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
         }
+         if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
+        flywheel.moveVoltage(-12000);
+        reverse=true;
     }
+    if (controller.getDigital(ControllerDigital::L1)==0 && !held &&!toggle){
+        flywheel.moveVelocity(0);
+        reverse=false;
+    }
+    }
+   
+    
  } //updateFlywheel Ends
 
    

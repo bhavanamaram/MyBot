@@ -14,7 +14,7 @@ void initialize() {
 		pros::lcd::set_text(2, "To the right... ");
 		pros::lcd::set_text(3, "Find your ride ");
 			pros::lcd::set_text(4, "Now put that whip in drive  ");
-	pros::Imu LeftInertial(7);
+	pros::Imu inertial(7);
 	// pros::ADIDigitalOut  rightPiston('H');
     pros::ADIDigitalOut  leftPiston('B');
 	
