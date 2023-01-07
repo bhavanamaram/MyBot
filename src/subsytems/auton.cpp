@@ -37,7 +37,7 @@ void updateAuton(){
     // turnToAngle(270); //turn again to act as a second pid system 
     pros::delay(1000);
     // driveForward(1.5);  
-    turnToAngle(-140));
+    turnToAngle(-140);
     pros::delay(10);
     turnToAngle(-140);
 
