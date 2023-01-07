@@ -15,10 +15,10 @@ void updateAuton(){
 
     driveForward(7);
 
-    turnToAngle(340);
-    turnToAngle(340);
-    turnToAngle(340);
-    turnToAngle(340); //turn towarsd the goal 
+    turnToAngle(-20);
+     pros::delay(10);//wait 
+    turnToAngle(-20);
+    turnToAngle(-20); //turn towarsd the goal 
     pros::delay(10);//wait 
     driveForward(1);//drive foward towards the line
     while(flywheel.getActualVelocity()<400){ //wait until rpm hits 400
@@ -37,9 +37,9 @@ void updateAuton(){
     // turnToAngle(270); //turn again to act as a second pid system 
     pros::delay(1000);
     // driveForward(1.5);  
-    turnToAngle(220);
+    turnToAngle(-140));
     pros::delay(10);
-    turnToAngle(220);
+    turnToAngle(-140);
 
     pros::delay(10);
 

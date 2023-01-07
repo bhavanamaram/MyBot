@@ -1,7 +1,7 @@
 #include "main.h"
 #include "intake.hpp"
 #include <utility>
-pros::Imu inertial(7);
+
 double initAngle=0;
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
@@ -88,11 +88,11 @@ void turnToAngle(double targetAngle){ //turn non-relitive to given target (degre
     rotatePID.setTarget(targetAngle);
 
     // double initAngle = drive->getState().theta.convert(okapi::degree);
-    double initAngle = inertial.get_heading();
+    double initAngle = inertial.controllerGet(); 
 
     while (abs(targetAngle - initAngle) >= 3) {
         // initAngle = drive->getState().theta.convert(okapi::degree);
-        initAngle = inertial.get_heading();
+        initAngle = inertial.controllerGet(); 
         double vel = rotatePID.step(initAngle);
         drive -> getModel() -> tank(vel, -vel);//turn faster by moving the other side the oppisite way
         pros::delay(20);
