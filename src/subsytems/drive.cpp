@@ -13,17 +13,18 @@ Motor leftBottom(5, true, AbstractMotor::gearset::blue, AbstractMotor::encoderUn
 
 MotorGroup leftDrive ({leftFront,leftTop,leftBottom}); //define the left side of the drive as a motor group to allow cleaner code
 MotorGroup rightDrive({rightFront,rightTop,rightBottom});//define the left side of the drive as a motor group to allow cleaner code
+
 //imu 7
 // MotorGroup left(leftFront,leftTop,leftBottom);
   std::shared_ptr<OdomChassisController> drive =ChassisControllerBuilder()
     .withMotors({leftFront, leftTop, leftBottom}, {rightFront, rightTop, rightBottom}) //defines the left and right side of the drive
-    .withDimensions(  AbstractMotor::gearset::blue, {{4_in, 15_in}, okapi::imev5BlueTPR})
+    .withDimensions(  AbstractMotor::gearset::blue, {{4.125_in, 15_in}, okapi::imev5BlueTPR*  7./3.})
     .withGains(//pid
         {0.0015, 0,  0.000085}, // distance controller gains
         {0.001, 0,0}, // turn controller gains
         {0.001, 0, 0}  // angle controller gains (helps drive straight)
     )
-    .withOdometry({{4_in, 15_in}, quadEncoderTPR}) //specifies the tracking wheels dimentions
+    .withOdometry() //specifies the tracking wheels dimentions
     .buildOdometry();
     //this creates a drive as an object with PID and the default odometry functions, most of the default odom functions suck tho so we make our own in odom files
 
