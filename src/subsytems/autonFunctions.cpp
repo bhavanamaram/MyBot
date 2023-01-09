@@ -74,15 +74,22 @@ void driveBlorward(double distance, double scalar) {
     drive -> getModel() -> tank(0, 0); //stop the drive once target is met
 }
 
-void index(){ //turn on indexer at max rpm for 10 ms 
-intakeMotor.moveVelocity(-600);
-pros::delay(150);
+void index( int target){ //turn on indexer at max rpm for 10 ms 
+while(flywheel.getActualVelocity()>target-20){ //allow 20 rpm diff
+   intakeMotor.moveVelocity(-600);
+   pros::delay(100);
+   intakeMotor.moveVelocity(0);
+   pros::delay(100);
+
+}
 intakeMotor.moveVelocity(0);
 }
-void indexLast(){
-    intakeMotor.moveVelocity(-600);
-    pros::delay(540); //index for half a second due to this being the last disc in the stack
-    intakeMotor.moveVelocity(0);
+void indexLast(int target){
+   while(flywheel.getActualVelocity()> target-30){ //allow 20 rpm diff
+   intakeMotor.moveVelocity(-600);
+}
+intakeMotor.moveVelocity(0);
+    
 }
 void turnToAngle(double targetAngle){ //turn non-relitive to given target (degrees)
    // angle in degrees

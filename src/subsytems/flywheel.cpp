@@ -9,6 +9,7 @@ bool toggle=false; //toggles the motor on and off
 bool held=false;
 bool lock=false;//prevents the toggle spam (stuttering of the motor which is damaging)
 bool reverse=false;
+bool toggleRumble=true;
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
 void updateFlywheel(){
     
@@ -27,8 +28,14 @@ void updateFlywheel(){
     }
 
     //controll the flywheel based on toggling system above 
+    if(flywheel.getActualVelocity()>350 && toggleRumble==true){
+        controller.rumble(".");
+        toggleRumble = false;
+    }
     if(held){
         flywheel.moveVoltage(12000);//if button is held it goes to max rpm
+        leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
+        rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
     }
     else  if(toggle && held==false){
         flywheel.moveVelocity(360);
@@ -37,12 +44,16 @@ void updateFlywheel(){
          rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold); //set to hold to prevent moving while shooting 
     }
     
-    else if(!toggle && held==false){
+    else if(!toggle && held==false && !reverse){
         flywheel.moveVelocity(0); //stop the flywheel if toggle is off
+        if(flywheel.getActualVelocity()<300){
+            toggleRumble=true;
+        }
         if(state==1){
             leftDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
-      rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
+            rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
         }
+    }
          if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
         flywheel.moveVoltage(-12000);
         reverse=true;
@@ -51,7 +62,7 @@ void updateFlywheel(){
         flywheel.moveVelocity(0);
         reverse=false;
     }
-    }
+    
    
     
  } //updateFlywheel Ends
