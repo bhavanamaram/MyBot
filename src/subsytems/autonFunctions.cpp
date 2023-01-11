@@ -75,7 +75,7 @@ void driveBlorward(double distance, double scalar) {
 }
 
 void index( int target){ //turn on indexer at max rpm for 10 ms 
-while(flywheel.getActualVelocity()>target-20){ //allow 20 rpm diff
+while(flywheel.getActualVelocity()>target-10){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
    pros::delay(100);
    intakeMotor.moveVelocity(0);
@@ -85,7 +85,7 @@ while(flywheel.getActualVelocity()>target-20){ //allow 20 rpm diff
 intakeMotor.moveVelocity(0);
 }
 void indexLast(int target){
-   while(flywheel.getActualVelocity()> target-30){ //allow 20 rpm diff
+   while(flywheel.getActualVelocity()> target-20){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
 }
 intakeMotor.moveVelocity(0);

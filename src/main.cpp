@@ -8,16 +8,29 @@
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+void leftPressed(){
+route=1;
+
+}
+void middlePressed(){
+route=2;
+}
+void rightPressed(){
+route=3;
+}
 void initialize() {
 	pros::lcd::initialize();  
-	// pros::lcd::set_text(1, "To the left...");
+	pros::lcd::set_text(1, "To the left...");
 	// 	pros::lcd::set_text(2, "To the right... ");
 	// 	pros::lcd::set_text(3, "Find your ride ");
 	// 		pros::lcd::set_text(4, "Now put that whip in drive  ");
 	
-	// pros::ADIDigitalOut  rightPiston('H');
+	pros::lcd::register_btn0_cb(leftPressed);
+	pros::lcd::register_btn1_cb(middlePressed);
+	pros::lcd::register_btn2_cb(rightPressed);
     pros::ADIDigitalOut  leftPiston('B');
 	okapi::IMU  inertial = IMU(7);
+	
 }
 
 /**

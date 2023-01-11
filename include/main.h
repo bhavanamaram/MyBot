@@ -41,6 +41,8 @@
  */
 #include "okapi/api.hpp"
 #include "pros/api_legacy.h"
+// #include <iostream>
+// #include <fstream>
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -62,6 +64,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+void leftPressed();
+void middlePressed();
+void rightPressed();
 void autonomous(void);
 void initialize(void);
 void disabled(void);
@@ -83,6 +88,7 @@ void opcontrol(void);
 #include "subsytems/auton.hpp"
 #include "subsytems/autonFunctions.hpp"
 #include "subsytems/intake.hpp"
+
 //#include <iostream>
 #endif
 
