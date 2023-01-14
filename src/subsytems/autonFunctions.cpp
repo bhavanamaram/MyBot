@@ -3,6 +3,7 @@
 #include <utility>
 okapi::IMU  inertial = IMU(7);
 double initAngle=0;
+double targetF;
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
@@ -75,21 +76,23 @@ void driveBlorward(double distance, double scalar) {
 }
 
 void index( int target){ //turn on indexer at max rpm for 10 ms 
-while(flywheel.getActualVelocity()>target-10){ //allow 20 rpm diff
+while(flywheel.getActualVelocity()>target-50){ //allow 50 rpm diff
    intakeMotor.moveVelocity(-600);
-   pros::delay(100);
+   pros::delay(300);
    intakeMotor.moveVelocity(0);
-   pros::delay(100);
+   pros::delay(50);
 
 }
 intakeMotor.moveVelocity(0);
 }
+
+
 void indexLast(int target){
-   while(flywheel.getActualVelocity()> target-20){ //allow 20 rpm diff
+   while(flywheel.getActualVelocity()> target-30){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
+   pros::delay(1);
 }
 intakeMotor.moveVelocity(0);
-    
 }
 void turnToAngle(double targetAngle){ //turn non-relitive to given target (degrees)
    // angle in degrees
@@ -116,4 +119,33 @@ void turnToAngle(double targetAngle){ //turn non-relitive to given target (degre
 
     drive -> getModel() -> tank(0, 0);
 
+}
+
+// void bangBang(double target){;
+//     if(flywheel.getActualVelocity()*5<target-50){
+//         flywheel.moveVoltage(12000);
+//     }
+//     else if(flywheel.getActualVelocity()*5>target+50){
+//         flywheel.moveVoltage(0);
+//     }
+//     else{
+//         flywheel.moveVoltage(4*target);
+//     }
+// }
+
+
+void bangBang() {
+    while (true) {
+        pros::lcd::set_text(4, std::to_string((flywheel.getActualVelocity())*5));
+        if(flywheel.getActualVelocity()*5<targetF-50){
+            flywheel.moveVoltage(12000);
+        }
+        else if(flywheel.getActualVelocity()*5>targetF+50){
+            flywheel.moveVoltage(0);
+        }
+        else{
+            flywheel.moveVoltage(4*targetF);
+        }
+        // pros::delay(20); // it will run this task every 20ms
+    }
 }

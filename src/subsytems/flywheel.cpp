@@ -12,7 +12,7 @@ bool reverse=false;
 bool toggleRumble=true;
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
 void updateFlywheel(){
-    
+
  if(controller.getDigital(ControllerDigital::L2) == 1){
     held=true;
     

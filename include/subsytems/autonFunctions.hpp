@@ -7,3 +7,5 @@ void turnToAngle(double targetAngle);
 extern okapi::IMU  inertial;
 extern double initAngle;
 void driveBlorward(double distance, double scalar);
+void bangBang();
+extern double targetF;
