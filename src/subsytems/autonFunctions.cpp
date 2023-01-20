@@ -7,8 +7,8 @@ double targetF;
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    intakeMotor.moveVelocity(300); //move the roller at max speed
-    pros::delay(300); //wait half a second to allow roller to spin to our color 
+    intakeMotor.moveVelocity(600); //move the roller at max speed
+    pros::delay(600); //wait half a second to allow roller to spin to our color 
     leftDrive.moveVelocity(0);
     rightDrive.moveVelocity(0);
     intakeMotor.moveVelocity(0); //cut everyting besides flywheel
@@ -75,22 +75,22 @@ void driveBlorward(double distance, double scalar) {
     drive -> getModel() -> tank(0, 0); //stop the drive once target is met
 }
 
-void index( int target){ //turn on indexer at max rpm for 10 ms 
-while(flywheel.getActualVelocity()>target-50){ //allow 50 rpm diff
+void index( int target){ //turn on indexer at max rpm for 100 ms 
+while(flywheel.getActualVelocity()>target){ //allow 50 rpm diff
    intakeMotor.moveVelocity(-600);
-   pros::delay(300);
+   pros::delay(100);
    intakeMotor.moveVelocity(0);
-   pros::delay(50);
-
+   pros::delay(100);
 }
 intakeMotor.moveVelocity(0);
 }
 
 
 void indexLast(int target){
-   while(flywheel.getActualVelocity()> target-30){ //allow 20 rpm diff
+   while(flywheel.getActualVelocity()> target-100){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
    pros::delay(1);
+   controller.rumble(".");
 }
 intakeMotor.moveVelocity(0);
 }

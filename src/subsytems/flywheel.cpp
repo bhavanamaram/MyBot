@@ -10,7 +10,15 @@ bool held=false;
 bool lock=false;//prevents the toggle spam (stuttering of the motor which is damaging)
 bool reverse=false;
 bool toggleRumble=true;
+int targetTBH=360; //define
+double error=0; //define
+double output=0;
+double tbh=0;
+double prev_error=0;
+bool initiaized=false;
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
+static pros::Task my_task (TBH, NULL, TASK_PRIORITY_DEFAULT,TASK_STACK_DEPTH_DEFAULT, "Example Task");
+
 void updateFlywheel(){
 
  if(controller.getDigital(ControllerDigital::L2) == 1){
@@ -37,15 +45,18 @@ void updateFlywheel(){
         leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
         rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
     }
-    else  if(toggle && held==false){
-        flywheel.moveVelocity(360);
+    else if(toggle && held==false){
+        // flywheel.moveVelocity(360);
+        targetTBH=360;
          //move the flywheel at 350 rpm if toggled 
          leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
          rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold); //set to hold to prevent moving while shooting 
     }
     
     else if(!toggle && held==false && !reverse){
-        flywheel.moveVelocity(0); //stop the flywheel if toggle is off
+        // flywheel.moveVelocity(0); //stop the flywheel if toggle is off
+        targetTBH=0;
+        // moveFlywheel.remove;
         if(flywheel.getActualVelocity()<300){
             toggleRumble=true;
         }
@@ -54,12 +65,13 @@ void updateFlywheel(){
             rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
         }
     }
-         if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
+    if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
         flywheel.moveVoltage(-12000);
         reverse=true;
     }
     if (controller.getDigital(ControllerDigital::L1)==0 && !held &&!toggle){
-        flywheel.moveVelocity(0);
+        // flywheel.moveVelocity(0);
+        targetTBH=0;
         reverse=false;
     }
     
@@ -67,6 +79,31 @@ void updateFlywheel(){
     
  } //updateFlywheel Ends
 
-   
 
+
+
+
+
+
+
+/*
+
+error = goal - currentSpeed;                // calculate the error;
+output += gain * error;                     // integrate the output;
+if (signbit(error)!= signbit(prev_error)) { // if zero crossing,
+  output = 0.5 * (output + tbh);            // then Take Back Half
+  tbh = output;                             // update Take Back Half variable
+  prev_error = error;                       // and save the previous error
+}
+
+*/
+   
+void TBH(void*){
+    error= targetTBH-flywheel.getActualVelocity();
+    output+= 0.02 *error;
+    if(signbit(error)!= signbit(prev_error)){
+        tbh=output;
+        prev_error=error;
+    }
+}
        
