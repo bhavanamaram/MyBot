@@ -21,8 +21,8 @@ route=3;
 void initialize() {
 	pros::lcd::initialize();  
 	pros::lcd::set_text(1, "To the left...");
-	// 	pros::lcd::set_text(2, "To the right... ");
-	// 	pros::lcd::set_text(3, "Find your ride ");
+		pros::lcd::set_text(2, "To the right... ");
+		pros::lcd::set_text(3, "Find your ride ");
 	// 		pros::lcd::set_text(4, "Now put that whip in drive  ");
 	
 	pros::lcd::register_btn0_cb(leftPressed);

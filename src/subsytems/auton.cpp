@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=2;
+int route=5;
 // int target=0;
 /*
 route 1 is roller, move to middle, shoot, second rolelr
@@ -12,8 +12,8 @@ route 3 is half of route one to move away from the alliance auton
 route 4 is for testing shit
 */
 void updateAuton(){    
-flywheel.moveVoltage(12000);  
-
+// flywheel.moveVoltage(12000);  
+targetTBH=460;
 if(route==1){
  
     roller();
@@ -92,7 +92,7 @@ leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     intakeMotor.moveVelocity(0);
 }
 if(route==3){
-    flywheel.moveVoltage(10000);
+    // flywheel.moveVoltage(10000);
     roller();
     pros::delay(500);
     driveForward(0.6);
@@ -135,5 +135,8 @@ if(route==4){
         indexLast(430); //index the last disc in the stack which takes more time 
     pros::delay(800);
     flywheel.moveVelocity(0);
+}
+if(route==5){
+  driveBackward(2,0.75);
 }
 }

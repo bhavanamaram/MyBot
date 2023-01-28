@@ -10,12 +10,15 @@ bool held=false;
 bool lock=false;//prevents the toggle spam (stuttering of the motor which is damaging)
 bool reverse=false;
 bool toggleRumble=true;
-int targetTBH=360; //define
+double targetTBH=360; //define
 double error=0; //define
 double output=0;
 double tbh=0;
 double prev_error=0;
 bool initiaized=false;
+double k=0;
+
+int Time = pros::millis();
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
 static pros::Task my_task (TBH, NULL, TASK_PRIORITY_DEFAULT,TASK_STACK_DEPTH_DEFAULT, "Example Task");
 
@@ -54,7 +57,7 @@ void updateFlywheel(){
     }
     
     else if(!toggle && held==false && !reverse){
-        // flywheel.moveVelocity(0); //stop the flywheel if toggle is off
+        flywheel.moveVelocity(0); //stop the flywheel if toggle is off
         targetTBH=0;
         // moveFlywheel.remove;
         if(flywheel.getActualVelocity()<300){
@@ -66,11 +69,11 @@ void updateFlywheel(){
         }
     }
     if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
-        flywheel.moveVoltage(-12000);
+        // flywheel.moveVoltage(-12000);
         reverse=true;
     }
     if (controller.getDigital(ControllerDigital::L1)==0 && !held &&!toggle){
-        // flywheel.moveVelocity(0);
+        flywheel.moveVelocity(0);
         targetTBH=0;
         reverse=false;
     }
@@ -98,12 +101,39 @@ if (signbit(error)!= signbit(prev_error)) { // if zero crossing,
 
 */
    
-void TBH(void*){
-    error= targetTBH-flywheel.getActualVelocity();
-    output+= 0.02 *error;
-    if(signbit(error)!= signbit(prev_error)){
-        tbh=output;
-        prev_error=error;
-    }
+// void TBH(void*){
+//   while(true){
+//       Time = pros::millis();
+//     pros::delay(10);
+//    error= targetTBH-flywheel.getActualVelocity();
+//    if(targetTBH!=0){
+// output=abs(pow(((targetTBH/(1+pow((2.718),-0.003*error)))*20),1.02)+3352);
+//    }
+//    if(targetTBH==0){
+//     output=0;
+//    }
+// if(output>12000){
+//     flywheel.moveVoltage(12000);
+// }else{
+//     flywheel.moveVoltage(output);
+// }
+//    flywheel.moveVelocity((pow(targetTBH/(1+pow((2.718),-0.01*error)),1)));
+//   flywheel.moveVelocity(targetTBH);
+// //  printf("Voltage %d )\n", flywheel.getVoltage());
+// //  pros::delay(500);
+//   }
+
+//   }
+// }
+void TBH(void* ){
+    //flexwheel mass is 117.934grams 
+
+while(true){
+   pros::delay(10);
+   double k=1.2/(2*targetTBH);
+   error=targetTBH-flywheel.getActualVelocity();
+   output=(((targetTBH/1+pow((2.718),(-k*error)))*20)+(targetTBH*6));
 }
+}
+
        

@@ -56,9 +56,38 @@ void driveBlorward(double distance, double scalar) {
     double orgPosX = drive->getState().x.convert(okapi::foot); //store the orginal position
     double orgPosY = drive->getState().y.convert(okapi::foot);
 
-    double distTravelled = 69696.420; //idk what this does but jad has it
+    double distTravelled = 0; 
 
     while (abs(target-distTravelled) >= 0.2) { //pid shit i think idk
+        double dx = drive->getState().x.convert(okapi::foot) - orgPosX;
+        double dy = drive->getState().y.convert(okapi::foot) - orgPosY;
+
+        distTravelled = sqrt(dx*dx + dy*dy);
+        
+        double vel = drivePID.step(distTravelled);
+
+        drive -> getModel() -> tank(vel * scalar, vel * scalar);
+
+        pros::delay(10);
+    }
+
+    drivePID.reset(); //reset everything to move relitive 
+    drive -> getModel() -> tank(0, 0); //stop the drive once target is met
+}
+
+void driveBackward(double distance, double scalar) {
+    okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.75, 0.01, 0.01); //create a new drive object with specified pid
+
+    const double target = distance; //idk why not just use distance
+
+    drivePID.setTarget(target); //tels PROS: to move the drive using pid to distance
+
+    double orgPosX = drive->getState().x.convert(okapi::foot); //store the orginal position
+    double orgPosY = drive->getState().y.convert(okapi::foot);
+
+    double distTravelled = 0; 
+
+    while (target-distTravelled <= 0.2) { //pid shit i think idk
         double dx = drive->getState().x.convert(okapi::foot) - orgPosX;
         double dy = drive->getState().y.convert(okapi::foot) - orgPosY;
 
