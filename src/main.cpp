@@ -89,7 +89,7 @@ updateDrive();
 updateFlywheel();
 updateIntake();
 
-rate.delay(100_Hz);
+rate.delay(100_Hz); 
 	}
 }
   

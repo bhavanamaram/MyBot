@@ -17,7 +17,6 @@ double tbh=0;
 double prev_error=0;
 bool initiaized=false;
 double k=0;
-double v=0;
 
 int Time = pros::millis();
 Motor flywheel(10,true,AbstractMotor::gearset::blue,AbstractMotor::encoderUnits::degrees);
@@ -130,11 +129,10 @@ void TBH(void* ){
     //flexwheel mass is 117.934grams 
 
 while(true){
-    v=targetTBH*19+422;
    pros::delay(10);
    double k=1.2/(2*targetTBH);
    error=targetTBH-flywheel.getActualVelocity();
-   output=(((targetTBH/1+pow((2.718),(-k*error)))*20)+(v));
+   output=(((targetTBH/1+pow((2.718),(-k*error)))*20)+((targetTBH*19)+422));
 }
 }
 
