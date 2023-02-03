@@ -10,3 +10,7 @@ void driveBlorward(double distance, double scalar);
 void bangBang();
 extern double targetF;
 void driveBackward(double distance, double scalar);  
+extern double ogXPos;
+extern double ogYPost;
+extern double distance;
+extern double targetAngle;

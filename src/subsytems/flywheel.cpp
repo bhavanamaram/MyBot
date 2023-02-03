@@ -132,7 +132,10 @@ while(true){
    pros::delay(10);
    double k=1.2/(2*targetTBH);
    error=targetTBH-flywheel.getActualVelocity();
-   output=(((targetTBH/1+pow((2.718),(-k*error)))*20)+((targetTBH*19)+422));
+   output=(((targetTBH/(1+pow((2.718),(-1*k*error))))*20)+((targetTBH*10)));
+
+
+   flywheel.moveVoltage(output);
 }
 }
 
