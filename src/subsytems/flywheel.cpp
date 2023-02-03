@@ -129,13 +129,29 @@ void TBH(void* ){
     //flexwheel mass is 117.934grams 
 
 while(true){
+//CUSTOM ALG
+/*while(true){
    pros::delay(10);
    double k=1.2/(2*targetTBH);
    error=targetTBH-flywheel.getActualVelocity();
-   output=(((targetTBH/(1+pow((2.718),(-1*k*error))))*20)+((targetTBH*10)));
-
-
+   output=(((targetTBH/1+pow((2.718),(-k*error)))*20)+((targetTBH*19)+422));
    flywheel.moveVoltage(output);
+}*/
+//BANG BANG
+while(true){
+    pros::delay(200);
+    if(flywheel.getActualVelocity()<(targetTBH-30)){
+        flywheel.moveVoltage(12000);
+    }
+    else if(flywheel.getActualVelocity()<(targetTBH+30) && flywheel.getActualVelocity()>(targetTBH-30)){
+        flywheel.moveVoltage(targetTBH*20);
+    }
+    else if(flywheel.getActualVelocity()>(targetTBH+30)){
+        flywheel.moveVoltage(0);
+    }
+    else{
+        flywheel.moveVelocity(targetTBH);
+    }
 }
 }
 
