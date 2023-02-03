@@ -147,7 +147,7 @@ while(true){
         flywheel.moveVoltage(targetTBH*20);
     }
     else if(flywheel.getActualVelocity()>(targetTBH+30)){
-        flywheel.moveVoltage(0);
+        flywheel.moveVoltage(0);  
     }
     else{
         flywheel.moveVelocity(targetTBH);
