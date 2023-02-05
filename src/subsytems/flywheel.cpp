@@ -139,7 +139,11 @@ while(true){
 }*/
 //BANG BANG
 while(true){ 
-    pros::delay(200);
+    
+    if(targetTBH==0){
+        flywheel.moveVoltage(0);
+    }
+   
     if(flywheel.getActualVelocity()<(targetTBH-30)){
         flywheel.moveVoltage(12000);
     }
@@ -152,7 +156,8 @@ while(true){
     else{
         flywheel.moveVelocity(targetTBH);
     }
+     pros::delay(450);
 }
 }
-
+}
        

@@ -75,7 +75,7 @@ void driveBlorward(double distance, double scalar) {
     drive -> getModel() -> tank(0, 0); //stop the drive once target is met
 }
 
-void driveBackward(double distance, double scalar) {
+void driveBackward(double distance, double scalar=1) {    
     okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.75, 0.01, 0.01); //create a new drive object with specified pid
 
     const double target = distance; //idk why not just use distance
@@ -87,12 +87,13 @@ void driveBackward(double distance, double scalar) {
 
     double distTravelled = 0; 
 
-    while (target-distTravelled <= 0.2) { //pid shit i think idk
+    // while (target-distTravelled <= 0.2 ) { //pid shit i think idk
+    while(true){
         double dx = drive->getState().x.convert(okapi::foot) - orgPosX;
         double dy = drive->getState().y.convert(okapi::foot) - orgPosY;
 
-        distTravelled = sqrt(dx*dx + dy*dy);
-        
+        distTravelled = -sqrt(pow(dx,2) + pow(dy,2));
+     
         double vel = drivePID.step(distTravelled);
 
         drive -> getModel() -> tank(vel * scalar, vel * scalar);
@@ -107,16 +108,15 @@ void driveBackward(double distance, double scalar) {
 void index( int target){ //turn on indexer at max rpm for 100 ms 
 while(flywheel.getActualVelocity()>target){ //allow 50 rpm diff
    intakeMotor.moveVelocity(-600);
-   pros::delay(100);
-   intakeMotor.moveVelocity(0);
-   pros::delay(100);
+   pros::delay(1);
+   
 }
 intakeMotor.moveVelocity(0);
 }
 
 
 void indexLast(int target){
-   while(flywheel.getActualVelocity()> target-100){ //allow 20 rpm diff
+   while(flywheel.getActualVelocity()> target){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
    pros::delay(1);
    controller.rumble(".");
@@ -178,7 +178,8 @@ void bangBang() {
         // pros::delay(20); // it will run this task every 20ms
     }
 }
-void driveToPoPoint(double posX, double posY,bool backward=false,double speed=1){
+
+void driveToPoint(double posX, double posY,bool backward,double speed){
   double ogXPos=drive->getState().x.convert(okapi::foot); //get starting X position
   double ogYPos=drive->getState().y.convert(okapi::foot);//get starting Y position
   double distance = pow((posX-ogXPos),2)+ pow((posY-ogYPos),2); //calculate distance using distnace formula 
@@ -187,7 +188,7 @@ void driveToPoPoint(double posX, double posY,bool backward=false,double speed=1)
   if((posX-ogXPos)>0 ){ //right
     targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
   }
-  if(posX-ogXPos<0){ //left
+  if(posX-ogXPos<=0){ //left
     targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
   }
   if(backward==false){ //If driving shooter foward 

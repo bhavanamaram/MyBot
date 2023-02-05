@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=5;
+int route=5; 
 // int target=0;
 /*
 route 1 is roller, move to middle, shoot, second rolelr
@@ -136,7 +136,40 @@ if(route==4){
     pros::delay(800);
     flywheel.moveVelocity(0);
 }
-if(route==5){
-  driveBackward(2,0.75);
+if(route==5){   
+
+    roller();
+     pros::delay(500);
+    driveForward(0.6);
+    pros::delay(200);
+    turnToAngle(63.4);
+    pros::delay(200);
+    driveForward(4.4);
+    //    flywheel.moveVelocity(440);
+    turnToAngle(-35);
+    driveForward(0.75);
+    while(flywheel.getActualVelocity()<430){ //wait until rpm hits 430
+            pros::delay(1);   
+            }
+        index(450); //index
+        controller.rumble(".");
+        //  flywheel.moveVelocity(410);
+        pros::delay(900);
+        while(flywheel.getActualVelocity()<450){ //wait till rpm hits 430 (higher becuase its the last disc)
+            pros::delay(1);   
+            }
+        indexLast(430); //index the last disc in the stack which takes more time 
+    // pros::delay(800);
+    targetTBH=0;
+    // driveBackward(-1,1);
+    pros::delay(500);
+    turnToAngle(-130);
+    intakeMotor.moveVelocity(600);
+    driveBackward(-4,0.5);
+    
 }
+
+
+
+
 }
