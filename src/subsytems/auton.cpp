@@ -6,10 +6,12 @@ int count=0;
 int route=5; 
 // int target=0;
 /*
-route 1 is roller, move to middle, shoot, second rolelr
-route 2 is move foward shoot roller
+route 1 is roller, move to middle, shoot, second rolelr (old) 
+route 2 is move foward shoot roller                     (old)
 route 3 is half of route one to move away from the alliance auton 
-route 4 is for testing shit
+route 4 is for testing shooting/indexing
+route 5 is new attempt of swp
+route 6 is skills
 */
 void updateAuton(){    
 // flywheel.moveVoltage(12000);  
@@ -168,6 +170,22 @@ if(route==5){
     driveBackward(-4,0.5);
     
 }
+ if(route==6){
+  roller();
+  driveToPoint(0,1.8);
+  driveToPoint(-1,0,true,0.75);
+  turnToAngle(90); //turn into roller 
+  leftDrive.moveVelocity(-25);
+  rightDrive.moveVelocity(-25);
+  pros::delay(500); //assist the bot into going into the roller 
+  roller(); //do the roller acording to the function timings
+  driveToPoint(-1,8)
+   //shoot(); //commented because the function isnt made yet 
+   driveToPoint(0.5,5,true,0/75);
+   driveToPoint(2,7,true,0.75);
+   driveToPoint(1,8);
+  //shoot();
+ }
 } //update auton ends
 
 void driveToPoint(double posX, double posY,bool backward=false,double speed=1){
@@ -187,7 +205,7 @@ void driveToPoint(double posX, double posY,bool backward=false,double speed=1){
   driveBlorward(distance,speed);
     }
   if(backward==true){ //If driving intake foward
-    turnToAngle((-1*180)+targetAngle);
+    turnToAngle((-180+targetAngle));
     driveBackward(distance,speed);
   }
 }
