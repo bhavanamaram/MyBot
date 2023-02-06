@@ -116,7 +116,7 @@ intakeMotor.moveVelocity(0);
 
 
 void indexLast(int target){
-   while(flywheel.getActualVelocity()> target){ //allow 20 rpm diff
+   while(flywheel.getActualVelocity()> target-12){ //allow 20 rpm diff
    intakeMotor.moveVelocity(-600);
    pros::delay(1);
    controller.rumble(".");
@@ -196,7 +196,7 @@ void driveToPoint(double posX, double posY,bool backward,double speed){
   driveBlorward(distance,speed);
     }
   if(backward==true){ //If driving intake foward
-    turnToAngle(-targetAngle);
+    turnToAngle((-1*180)+targetAngle);
     driveBackward(distance,speed);
   }
 }
