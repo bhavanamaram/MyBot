@@ -179,24 +179,3 @@ void bangBang() {
     }
 }
 
-void driveToPoint(double posX, double posY,bool backward,double speed){
-  double ogXPos=drive->getState().x.convert(okapi::foot); //get starting X position
-  double ogYPos=drive->getState().y.convert(okapi::foot);//get starting Y position
-  double distance = pow((posX-ogXPos),2)+ pow((posY-ogYPos),2); //calculate distance using distnace formula 
-  double targetAngle = 0;
-
-  if((posX-ogXPos)>0 ){ //right
-    targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
-  }
-  if(posX-ogXPos<=0){ //left
-    targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
-  }
-  if(backward==false){ //If driving shooter foward 
-  turnToAngle(targetAngle);
-  driveBlorward(distance,speed);
-    }
-  if(backward==true){ //If driving intake foward
-    turnToAngle((-1*180)+targetAngle);
-    driveBackward(distance,speed);
-  }
-}
