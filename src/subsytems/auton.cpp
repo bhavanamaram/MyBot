@@ -16,7 +16,7 @@ route 6 is skills
 void driveToPoint(double posX, double posY,bool backward=false,double speed=1){
   double ogXPos=drive->getState().x.convert(okapi::foot); //get starting X position
   double ogYPos=drive->getState().y.convert(okapi::foot);//get starting Y position
-  double distance = pow((posX-ogXPos),2)+ pow((posY-ogYPos),2); //calculate distance using distnace formula 
+  double distance = sqrt(pow((posX-ogXPos),2)+ pow((posY-ogYPos),2)); //calculate distance using distnace formula 
   double targetAngle = 0;
 
   if((posX-ogXPos)>0 ){ //right
