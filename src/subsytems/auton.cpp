@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=5; 
+int route=7; 
 // int target=0;
 /*
 route 1 is roller, move to middle, shoot, second rolelr (old) 
@@ -13,16 +13,16 @@ route 4 is for testing shooting/indexing
 route 5 is new attempt of swp
 route 6 is skills
 */
-void driveToPoint(double posX, double posY,bool backward=false,double speed=1){
-  double ogXPos=drive->getState().x.convert(okapi::foot); //get starting X position
-  double ogYPos=drive->getState().y.convert(okapi::foot);//get starting Y position
+void driveToPoint(double posY, double posX,bool backward=false,double speed=1){
+  double ogXPos=drive->getState().y.convert(okapi::foot); //get starting X position
+  double ogYPos=drive->getState().x.convert(okapi::foot);//get starting Y position
   double distance = sqrt(pow((posX-ogXPos),2)+ pow((posY-ogYPos),2)); //calculate distance using distnace formula 
   double targetAngle = 0;
 
-  if((posX-ogXPos)>0 ){ //right
+  if((posX-ogXPos)>=0 ){ //right
     targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
   }
-  if(posX-ogXPos<=0){ //left
+  if(posX-ogXPos<0){ //left
     targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
   }
   if(backward==false){ //If driving shooter foward 
@@ -206,6 +206,9 @@ if(route==5){
    driveToPoint(2,7,true,0.75);
    driveToPoint(1,8);
   //shoot();
+ }
+ if(route==7){
+    driveToPoint(0,2);
  }
 } //update auton ends
 
