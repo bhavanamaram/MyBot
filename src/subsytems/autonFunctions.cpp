@@ -47,7 +47,7 @@ void driveForward(double distance) {
 
 
 void driveBlorward(double distance, double scalar) {
-    okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.8, 0, 0.007); //create a new drive object with specified pid
+    okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.75, 0.01, 0.01); //create a new drive object with specified pid
 
     const double target = distance; //idk why not just use distance
 
