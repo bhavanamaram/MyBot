@@ -47,7 +47,7 @@ void driveForward(double distance) {
 
 
 void driveBlorward(double distance, double scalar) {
-    okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.75, 0.01, 0.01); //create a new drive object with specified pid
+    okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.8, 0, 0.007); //create a new drive object with specified pid
 
     const double target = distance; //idk why not just use distance
 
@@ -58,7 +58,7 @@ void driveBlorward(double distance, double scalar) {
 
     double distTravelled = 0; 
 
-    while (abs(target-distTravelled) >= 0.2) { //pid shit i think idk  
+     while (abs(target-distTravelled) >= 0.2 || abs(leftDrive.getActualVelocity())>10) { //pid shit i think idk  
         double dx = drive->getState().x.convert(okapi::foot) - orgPosX;
         double dy = drive->getState().y.convert(okapi::foot) - orgPosY;
 
