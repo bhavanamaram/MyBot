@@ -210,5 +210,10 @@ if(route==5){
  if(route==7){
     driveToPoint(0,2);
  }
+ if(route==8){
+    roller();
+    driveToPoint(1,1);
+    driveToPoint(1.8,1.8,true,0.75);
+ }
 } //update auton ends
 

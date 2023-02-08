@@ -178,4 +178,21 @@ void bangBang() {
         // pros::delay(20); // it will run this task every 20ms
     }
 }
+void shoot(){
+  double ogXPos=drive->getState().y.convert(okapi::foot); //get starting X position
+  double ogYPos=drive->getState().x.convert(okapi::foot);//get starting Y position
+  double targetAngle = 0; //initiale turn to angle as 0 
+
+  if((-1-ogXPos)>0 ){ //If the target point is to the left of the current bot position
+    targetAngle=((atan((10-ogXPos)/(-1-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
+  }
+  if(10-ogXPos<=0){ //IF the target point is to the right of the currnt bot position 
+    targetAngle=((atan((10-ogXPos)/(-1-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
+  }
+  turnToAngle(targetAngle);
+  pros::delay(100); //allow 100 ms for the bot to stop turning
+  intakeMotor.moveVelocity(-600);
+  pros::delay(1000); //index for a second
+  intakeMotor.moveVelocity(0);  
+}
 
