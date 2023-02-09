@@ -88,7 +88,7 @@ updateExpansion();
 updateDrive();
 updateFlywheel();
 updateIntake();
-
+updateBlooper();
 rate.delay(100_Hz); 
 	}
 }
