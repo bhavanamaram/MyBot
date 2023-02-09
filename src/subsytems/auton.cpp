@@ -201,11 +201,11 @@ if(route==5){
   pros::delay(500); //assist the bot into going into the roller 
   roller(); //do the roller acording to the function timings
   driveToPoint(-1,8);
-   //shoot(); //commented because the function isnt made yet 
+   shoot(); //commented because the function isnt made yet 
    driveToPoint(0.5,5,true,0.75);
    driveToPoint(2,7,true,0.75);
    driveToPoint(1,8);
-  //shoot();
+  shoot();
  }
  if(route==7){
     driveToPoint(0,2);
