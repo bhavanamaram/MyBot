@@ -88,6 +88,7 @@ void opcontrol(void);
 #include "subsytems/auton.hpp"
 #include "subsytems/autonFunctions.hpp"
 #include "subsytems/intake.hpp"
+#include "subsytems/blooper/hpp"
 
 //#include <iostream>
 #endif
