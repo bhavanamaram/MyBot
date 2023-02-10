@@ -12,28 +12,9 @@ route 3 is half of route one to move away from the alliance auton
 route 4 is for testing shooting/indexing
 route 5 is new attempt of swp
 route 6 is skills
+route 7 is left roller
 */
-void driveToPoint(double posY, double posX,bool backward=false,double speed=1){
-  double ogXPos=drive->getState().y.convert(okapi::foot); //get starting X position
-  double ogYPos=drive->getState().x.convert(okapi::foot);//get starting Y position
-  double distance = sqrt(pow((posX-ogXPos),2)+ pow((posY-ogYPos),2)); //calculate distance using distnace formula 
-  double targetAngle = 0;
 
-  if((posX-ogXPos)>=0 ){ //right
-    targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
-  }
-  if(posX-ogXPos<0){ //left
-    targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
-  }
-  if(backward==false){ //If driving shooter foward 
-  turnToAngle(targetAngle);
-  driveBlorward(distance,speed);
-    }
-  if(backward==true){ //If driving intake foward
-    turnToAngle((-180+targetAngle));
-    driveBackward(distance,speed);
-  }
-}
 void updateAuton(){    
 // flywheel.moveVoltage(12000);  
 targetTBH=460;
@@ -191,28 +172,34 @@ if(route==5){
     driveBackward(-4,0.5);
     
 }
- if(route==6){
+ if(route==6){//skills
   roller();
-  driveToPoint(0,1.8);
+  driveToPoint(0,1.8,false,1);
+  pros::delay(1000);
   driveToPoint(-1,0,true,0.75);
-  turnToAngle(90); //turn into roller 
+  pros::delay(1000);
+  turnToAngle(-90); //turn into roller 
+  pros::delay(1000);
   leftDrive.moveVelocity(-25);
   rightDrive.moveVelocity(-25);
   pros::delay(500); //assist the bot into going into the roller 
+  leftDrive.moveVelocity(0);
   roller(); //do the roller acording to the function timings
-  driveToPoint(-1,8);
-   shoot(); //commented because the function isnt made yet 
+  driveToPoint(-1,8,false,1);
+   pros::delay(1000);
+   shoot(); 
+    pros::delay(1000);
    driveToPoint(0.5,5,true,0.75);
+    pros::delay(1000);
    driveToPoint(2,7,true,0.75);
-   driveToPoint(1,8);
+    pros::delay(1000);
+   driveToPoint(1,8,false,1);
+    pros::delay(1000);
   shoot();
  }
- if(route==7){
-    driveToPoint(0,2);
- }
- if(route==8){
+ if(route==7){ //left
     roller();
-    driveToPoint(2.2,2.2);
+    driveToPoint(2.2,2.2,false,1);
     driveToPoint(3.8,3.8,true,0.75);
     shoot();
  }

@@ -11,7 +11,7 @@ void bangBang();
 extern double targetF;
 void driveBackward(double distance, double scalar);    
 void shoot();
-// void driveToPoint(double posX, double posY,bool backward,double speed);
+void driveToPoint(double posX, double posY,bool backward,double speed);
 extern double ogXPos;
 extern double ogYPost;
 extern double distance;
