@@ -183,8 +183,14 @@ if(route==5){
   leftDrive.moveVelocity(-25);
   rightDrive.moveVelocity(-25);
   pros::delay(500); //assist the bot into going into the roller 
-  leftDrive.moveVelocity(0);
-  roller(); //do the roller acording to the function timings
+ 
+//   roller(); //do the roller acording to the function timings
+intakeMotor.moveVelocity(600);
+pros::delay(300);
+intakeMotor.moveVelocity(0);
+pros::delay(100);
+ leftDrive.moveVelocity(0);
+ rightDrive.moveVelocity(0);
   driveToPoint(-1,8,false,1);
    pros::delay(1000);
    shoot(); 
