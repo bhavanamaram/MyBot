@@ -1,18 +1,18 @@
 #include "main.h"
 using namespace okapi;
 bool ToggleBlooper=false;
-bool LockBlopper=true;
+bool LockBlooper=true;
 pros::ADIDigitalOut blooperPiston ('C');
 
 void updateBlooper(){
-    if(controller.getDigital(ControllerDigital::left) == 1){  
+    if(controller.getDigital(ControllerDigital::down) == 1){  
           if(LockBlooper){
           ToggleBlooper=!ToggleBlooper;
           LockBlooper=false;
-          piston.set_value(ToggleBlooper);    
+          blooperPiston.set_value(ToggleBlooper);    
         }
     }
-        if(controller.getDigital(ControllerDigital::left) == 0){
+        if(controller.getDigital(ControllerDigital::down) == 0){
           LockBlooper=true;
         }
 
