@@ -87,8 +87,8 @@ void driveBackward(double distance, double scalar=1) {
 
     double distTravelled = 0; 
 
-    // while (target-distTravelled <= 0.2 ) { //pid shit i think idk
-    while(true){
+    while (abs(target-distTravelled) >= 0.2 || abs(leftDrive.getActualVelocity())>10){ //pid shit i think idk
+    // while(true){
         double dx = drive->getState().x.convert(okapi::foot) - orgPosX;
         double dy = drive->getState().y.convert(okapi::foot) - orgPosY;
 
@@ -183,13 +183,13 @@ void shoot(){
   double ogYPos=drive->getState().x.convert(okapi::foot);//get starting Y position
   double targetAngle = 0; //initiale turn to angle as 0 
 
-  if((-1-ogXPos)>0 ){ //If the target point is to the left of the current bot position
-    targetAngle=((atan((10-ogXPos)/(-1-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
-  }
-  if(10-ogXPos<=0){ //IF the target point is to the right of the currnt bot position 
-    targetAngle=((atan((10-ogXPos)/(-1-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
-  }
-  turnToAngle(targetAngle);
+  // if((-1-ogXPos)>0 ){ //If the target point is to the left of the current bot position
+  //   targetAngle=((atan((-1-ogXPos)/(10-ogYPos))*(180/3.14159)-90)*-1);  //invert and make it from 0 180
+  // }
+  // if(10-ogXPos<=0){ //IF the target point is to the right of the currnt bot position 
+  //   targetAngle=((atan((-1-ogXPos)/(10-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
+  // }
+  // turnToAngle(targetAngle);
   pros::delay(100); //allow 100 ms for the bot to stop turning
   intakeMotor.moveVelocity(-600);
   pros::delay(1000); //index for a second
@@ -197,7 +197,7 @@ void shoot(){
 }
 
 void driveToPoint(double posY, double posX,bool backward,double speed){
-  double ogXPos=drive->getState().y.convert(okapi::foot); //get starting X position
+  double ogXPos=drive->getState().y.convert(okapi::foot); //get starting  position
   double ogYPos=drive->getState().x.convert(okapi::foot);//get starting Y position
   double distance = sqrt(pow((posX-ogXPos),2)+ pow((posY-ogYPos),2)); //calculate distance using distnace formula 
   double targetAngle = 0;
@@ -214,6 +214,6 @@ void driveToPoint(double posY, double posX,bool backward,double speed){
     }
   if(backward==true){ //If driving intake foward
     turnToAngle((-180+targetAngle));
-    driveBackward(distance,speed);
+    driveBackward(-distance,speed);
   }
 }

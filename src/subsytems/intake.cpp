@@ -6,7 +6,7 @@ void updateIntake(){
     if (controller.getDigital(ControllerDigital::R1) == 1){
         intakeMotor.moveVelocity(600); //intake when positive
     }else if (controller.getDigital(ControllerDigital::R2) == 1){
-        intakeMotor.moveVelocity(-600); //index/outake when negitive
+        intakeMotor.moveVelocity(-500); //index/outake when negitive
     }
     else{
         intakeMotor.moveVelocity(0);// stop if there is no input

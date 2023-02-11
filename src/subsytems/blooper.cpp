@@ -2,7 +2,7 @@
 using namespace okapi;
 bool ToggleBlooper=false;
 bool LockBlooper=true;
-pros::ADIDigitalOut blooperPiston ('C');
+pros::ADIDigitalOut blooperPiston ('D');
 
 void updateBlooper(){
     if(controller.getDigital(ControllerDigital::down) == 1){  

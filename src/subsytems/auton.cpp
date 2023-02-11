@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=7; 
+int route=5; 
 // int target=0;
 /*
 route 1 is roller, move to middle, shoot, second rolelr (old) 
@@ -12,7 +12,8 @@ route 3 is half of route one to move away from the alliance auton
 route 4 is for testing shooting/indexing
 route 5 is new attempt of swp
 route 6 is skills
-route 7 is left roller
+route 7 is left roller  
+route 8 is testing
 */
 
 void updateAuton(){    
@@ -140,74 +141,130 @@ if(route==4){
     pros::delay(800);
     flywheel.moveVelocity(0);
 }
-if(route==5){   
+if(route==5){   //swp
 
     roller();
-     pros::delay(500);
+     pros::delay(10);
     driveForward(0.6);
-    pros::delay(200);
+    // pros::delay(200);
     turnToAngle(63.4);
-    pros::delay(200);
+    // pros::delay(200);
     driveForward(4.4);
     //    flywheel.moveVelocity(440);
-    turnToAngle(-35);
+    turnToAngle(-30);
     driveForward(0.75);
-    while(flywheel.getActualVelocity()<430){ //wait until rpm hits 430
-            pros::delay(1);   
-            }
-        index(450); //index
-        controller.rumble(".");
-        //  flywheel.moveVelocity(410);
-        pros::delay(900);
-        while(flywheel.getActualVelocity()<450){ //wait till rpm hits 430 (higher becuase its the last disc)
-            pros::delay(1);   
-            }
-        indexLast(430); //index the last disc in the stack which takes more time 
+    // while(flywheel.getActualVelocity()<430){ //wait until rpm hits 430
+    //         pros::delay(1);   
+    //         }
+    //     index(450); //index
+    //     controller.rumble(".");
+    //     //  flywheel.moveVelocity(410);
+    //     pros::delay(900);
+    //     while(flywheel.getActualVelocity()<450){ //wait till rpm hits 430 (higher becuase its the last disc)
+    //         pros::delay(1);   
+    //         }
+    //     indexLast(430); //index the last disc in the stack which takes more time 
     // pros::delay(800);
+     intakeMotor.moveVelocity(-600);
+     pros::delay(200);
+      intakeMotor.moveVelocity(0);
+      pros::delay(1000);
+       intakeMotor.moveVelocity(-600);
+     pros::delay(700);
+      intakeMotor.moveVelocity(0);
     targetTBH=0;
     // driveBackward(-1,1);
-    pros::delay(500);
-    turnToAngle(-130);
+    pros::delay(300);
+    turnToAngle(-135);
     intakeMotor.moveVelocity(600);
-    driveBackward(-4,0.5);
+    driveBackward(-6,0.75);  
+    turnToAngle(-170);
+    driveBackward(-1.5,1);
+    // driveToPoint(6,9,false,1);
+    turnToAngle(-90);
+    leftDrive.moveVelocity(-300);
+    rightDrive.moveVelocity(-300);
+    pros::delay(100);
+    leftDrive.moveVelocity(0);
+rightDrive.moveVelocity(0);
+roller();
+    
     
 }
  if(route==6){//skills
-  roller();
-  driveToPoint(0,1.8,false,1);
-  pros::delay(1000);
-  driveToPoint(-1,0,true,0.75);
-  pros::delay(1000);
-  turnToAngle(-90); //turn into roller 
-  pros::delay(1000);
-  leftDrive.moveVelocity(-25);
-  rightDrive.moveVelocity(-25);
-  pros::delay(500); //assist the bot into going into the roller 
- 
-//   roller(); //do the roller acording to the function timings
-intakeMotor.moveVelocity(600);
-pros::delay(300);
-intakeMotor.moveVelocity(0);
-pros::delay(100);
- leftDrive.moveVelocity(0);
- rightDrive.moveVelocity(0);
-  driveToPoint(-1,8,false,1);
-   pros::delay(1000);
-   shoot(); 
+ roller();
+    // driveToPoint(0,0.01,false,1);
+    // driveToPoint(0.5,1.4,false,0.9);
+    leftDrive.moveVelocity(100);
+    rightDrive.moveVelocity(100);
+    pros::delay(500);
+     leftDrive.moveVelocity(0);
+    rightDrive.moveVelocity(0);
+     driveToPoint(0,1.4,false,1);
+     turnToAngle(90);
+    leftDrive.moveVelocity(-300);
+    rightDrive.moveVelocity(-300);
     pros::delay(1000);
-   driveToPoint(0.5,5,true,0.75);
-    pros::delay(1000);
-   driveToPoint(2,7,true,0.75);
-    pros::delay(1000);
-   driveToPoint(1,8,false,1);
-    pros::delay(1000);
-  shoot();
+       leftDrive.moveVelocity(-25);
+    rightDrive.moveVelocity(-25);
+    roller();
+    // driveToPoint(7,10,false,1);
  }
  if(route==7){ //left
+    targetTBH=490;
     roller();
-    driveToPoint(2.2,2.2,false,1);
-    driveToPoint(3.8,3.8,true,0.75);
-    shoot();
+    // driveToPoint(0,0.01,false,1);
+    // driveToPoint(0.5,1.4,false,0.9);
+    leftDrive.moveVelocity(25);
+    rightDrive.moveVelocity(25);
+    pros::delay(50);
+     leftDrive.moveVelocity(0);
+    rightDrive.moveVelocity(0);
+     driveToPoint(1.4,1.4,false,0.9);
+    pros::delay(1000);
+    turnToAngle(-10);
+    // shoot();
+     intakeMotor.moveVelocity(-600);
+     pros::delay(200);
+      intakeMotor.moveVelocity(0);
+      pros::delay(1000);
+       intakeMotor.moveVelocity(-600);
+     pros::delay(1000);
+      intakeMotor.moveVelocity(0);
+      pros::delay(1000);
+    intakeMotor.moveVelocity(600);
+    // driveToPoint(3.0,3.0,true,1);
+    driveToPoint(3.5,3.5,true,0.25);
+    intakeMotor.moveVelocity(0);
+    // shoot();
+ }
+ if (route==8){ //testing
+driveToPoint(2,2,false,1);
+pros::delay(1000);
+driveToPoint(3,3,true,1);
+pros::delay(1000);
+// driveToPoint(3,3,false,1);
+// turnToAngle(-90);
+driveToPoint(1,3,true,1);
+ }
+ if(route==9){
+    driveBackward(-2,1);
+    turnToAngle(90);
+    // driveToPoint(0,0.01,false,1);
+    // driveToPoint(0.5,1.4,false,0.9);
+    leftDrive.moveVelocity(-100);
+    rightDrive.moveVelocity(-100);
+    pros::delay(500);
+     leftDrive.moveVelocity(-25);
+    rightDrive.moveVelocity(-25);
+    pros::delay(500);
+    roller();
+    pros::delay(50);
+    driveForward(2);
+    turnToAngle(45);
+    driveForward(6);
+    
+    
  }
 } //update auton ends
 

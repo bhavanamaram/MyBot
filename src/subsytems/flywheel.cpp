@@ -50,7 +50,7 @@ void updateFlywheel(){
     }
     else if(toggle && held==false){
         // flywheel.moveVelocity(360);
-        targetTBH=360;
+        targetTBH=430;
          //move the flywheel at 350 rpm if toggled 
          leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
          rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold); //set to hold to prevent moving while shooting 
@@ -70,6 +70,7 @@ void updateFlywheel(){
     }
     if(controller.getDigital(ControllerDigital::L1) == 1 && !toggle && !held){
         // flywheel.moveVoltage(-12000);
+        targetTBH=-600;
         reverse=true;
     }
     if (controller.getDigital(ControllerDigital::L1)==0 && !held &&!toggle){
@@ -139,7 +140,7 @@ while(true){
 }*/
 //BANG BANG
 while(true){ 
-    
+    if(targetTBH>=0){
     if(targetTBH==0){
         flywheel.moveVoltage(0);
     }
@@ -156,7 +157,10 @@ while(true){
     else{
         flywheel.moveVelocity(targetTBH);
     }
-     pros::delay(450);
+     pros::delay(300);
+}else{
+    flywheel.moveVoltage(-12000);
+}
 }
 }
 }
