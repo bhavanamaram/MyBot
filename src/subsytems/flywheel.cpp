@@ -39,12 +39,13 @@ void updateFlywheel(){
     }
 
     //controll the flywheel based on toggling system above 
-    if(flywheel.getActualVelocity()>350 && toggleRumble==true){
+    if(flywheel.getActualVelocity()>400 && toggleRumble==true){
         controller.rumble(".");
         toggleRumble = false;
     }
     if(held){
-        flywheel.moveVoltage(12000);//if button is held it goes to max rpm
+        // flywheel.moveVoltage(12000);//if button is held it goes to max rpm
+        targetTBH=600;
         leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
         rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
     }

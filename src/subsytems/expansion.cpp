@@ -2,7 +2,7 @@
 using namespace okapi;
 bool Toggle=false;
 bool Lock=true;
-pros::ADIDigitalOut piston ('B');
+pros::ADIDigitalOut piston ('H');
 
 void updateExpansion(){
     if(controller.getDigital(ControllerDigital::up) == 1){  

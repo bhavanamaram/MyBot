@@ -19,6 +19,7 @@ void rightPressed(){
 route=3;
 }
 void initialize() {
+	
 	pros::lcd::initialize();  
 	pros::lcd::set_text(1, "To the left...");
 		pros::lcd::set_text(2, "To the right... ");
