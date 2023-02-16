@@ -114,7 +114,7 @@ leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     turnToAngle(45);
     turnToAngle(-135);
     intakeMotor.moveVelocity(600);
-    driveBackward(-6,0.5);
+    driveBackward(-5,0.75);
     turnToAngle(-10);
     //shoot
      intakeMotor.moveVelocity(-600);
