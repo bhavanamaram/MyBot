@@ -3,14 +3,14 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=7; 
+int route=3; 
 pros::ADIDigitalOut piSton ('H');
 // int target=0;
 /*
 route 1 is swp
-route 2 is skills
-route 3 is left roller  
-route 4 is right 
+route 2 is left
+route 3 is right 
+route 4 is skills 
 */
 
 void updateAuton(){    
