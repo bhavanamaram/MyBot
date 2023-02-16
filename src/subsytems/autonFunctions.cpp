@@ -4,16 +4,24 @@
 okapi::IMU  inertial = IMU(7);
 double initAngle=0;
 double targetF;
-
+double prevPos=0;
 void roller(){
-    leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
-    rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    pros::delay(400);
-    intakeMotor.moveVelocity(600); //move the roller at max speed
-    pros::delay(200); //wait half a second to allow roller to spin to our color 
-    leftDrive.moveVelocity(0);
-    rightDrive.moveVelocity(0);
-    intakeMotor.moveVelocity(0); //cut everyting besides flywheel
+    // leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
+    // rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
+    // pros::delay(400);
+    // intakeMotor.moveVelocity(600); //move the roller at max speed
+    // pros::delay(200); //wait half a second to allow roller to spin to our color 
+    // leftDrive.moveVelocity(0);
+    // rightDrive.moveVelocity(0);
+    // intakeMotor.moveVelocity(0); //cut everyting besides flywheel
+
+    //new 
+
+   prevPos= intakeMotor.getPosition();
+   while(intakeMotor.getPosition()<prevPos+360){
+    intakeMotor.moveVelocity(600);
+   }
+   intakeMotor.moveVelocity(0);
 }
 void driveForward(double distance) {
     okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.8, 0., 0.007); //create a new drive object with specified pid
