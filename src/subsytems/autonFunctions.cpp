@@ -230,7 +230,7 @@ void driveToPoint(double posY, double posX,bool backward,double speed){
   if(posX-ogXPos>0){  //swapped the signs in order to go backwards 
     targetAngle=((atan((posX-ogXPos)/(posY-ogYPos))*(180/3.14159)+90)*-1); //invert and make it from 0 to -180 
   }
-    turnToAngle((-180+targetAngle));
+    turnToAngle((targetAngle));
     driveBackward(-distance,speed);
   }
 }
