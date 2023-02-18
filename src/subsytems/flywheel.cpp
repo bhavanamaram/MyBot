@@ -40,7 +40,7 @@ void updateFlywheel(){
 
     //controll the flywheel based on toggling system above 
     if(flywheel.getActualVelocity()>400 && toggleRumble==true){
-        controller.rumble(".");
+        // controller.rumble(".");
         toggleRumble = false;
     }
     if(held){
@@ -52,6 +52,7 @@ void updateFlywheel(){
     else if(toggle && held==false){
         // flywheel.moveVelocity(360);
         targetTBH=430;
+        controller.rumble(".");
          //move the flywheel at 350 rpm if toggled 
          leftDrive.setBrakeMode(AbstractMotor::brakeMode::hold);
          rightDrive.setBrakeMode(AbstractMotor::brakeMode::hold); //set to hold to prevent moving while shooting 

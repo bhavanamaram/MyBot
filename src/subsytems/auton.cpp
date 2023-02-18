@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=1; 
+int route=3; 
 pros::ADIDigitalOut piSton ('H');
 // int target=0;
 /*
@@ -17,12 +17,10 @@ void updateAuton(){
 // flywheel.moveVoltage(12000);  
 targetTBH=460;
 if(route==1){   //swp
-    roller();
+       roller();
     driveForward(0.6); //drive foward to prevent clashing into the wal 
     turnToAngle(63.4); 
-    
     driveForward(4.4);
-    
     turnToAngle(-30);
     driveForward(0.75); 
     //shoot 2 (preloads)
@@ -36,7 +34,7 @@ if(route==1){   //swp
       //end of shoot block
     targetTBH=0;
     pros::delay(300);
-    turnToAngle(45);
+    turnToAngle(-130);
     driveBackward(-6,0.75);  
     turnToAngle(-170);
     driveBackward(-1.5,1);
@@ -91,9 +89,9 @@ roller();
    //roler
 leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    pros::delay(400);
+    pros::delay(700);
     intakeMotor.moveVelocity(600); //move the roller at max speed
-    pros::delay(400); //wait half a second to allow roller to spin to our color 
+    pros::delay(700); //wait half a second to allow roller to spin to our color 
     leftDrive.moveVelocity(0);
     rightDrive.moveVelocity(0);
     intakeMotor.moveVelocity(0); //cut everyting besides flywheel
@@ -111,11 +109,11 @@ leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
      intakeMotor.moveVelocity(0);
     turnToAngle(0);
     driveForward(0.5);
-    turnToAngle(45);
+    // turnToAngle(45);
     turnToAngle(-135);
     intakeMotor.moveVelocity(600);
     driveBackward(-5,0.75);
-    turnToAngle(-10);
+    turnToAngle(135);
     //shoot
      intakeMotor.moveVelocity(-600);
      pros::delay(200);
