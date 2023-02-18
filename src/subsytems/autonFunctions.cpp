@@ -18,9 +18,10 @@ void roller(){
     //new 
 
    prevPos= intakeMotor.getPosition();
-   while(intakeMotor.getPosition()<prevPos+360){
-    intakeMotor.moveVelocity(600);
-   }
+   intakeMotor.moveRelative( 360, 600);
+  //  while(intakeMotor.getPosition()<prevPos+360){
+  //   intakeMotor.moveVelocity(600);
+  //  }
    intakeMotor.moveVelocity(0);
 }
 void driveForward(double distance) {
