@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=3; 
+int route=1; 
 pros::ADIDigitalOut piSton ('H');
 // int target=0;
 /*
