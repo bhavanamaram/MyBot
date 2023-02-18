@@ -8,7 +8,7 @@ double prevPos=0;
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    pros::delay(500);
+    pros::delay(200);
     // intakeMotor.moveVelocity(600); //move the roller at max speed
     // pros::delay(200); //wait half a second to allow roller to spin to our color 
     // leftDrive.moveVelocity(0);
@@ -18,11 +18,12 @@ void roller(){
     //new 
 
   //  prevPos= intakeMotor.getPosition();
-   intakeMotor.moveRelative( 180, 600);
-  //  while(intakeMotor.getPosition()<prevPos+360){
-  //   intakeMotor.moveVelocity(600);
-  //  }
-  //  intakeMotor.moveVelocity(0);
+   intakeMotor.moveRelative( 606, 600);
+   pros::delay(300);
+//    while(intakeMotor.getPosition()<prevPos+360){
+//     intakeMotor.moveVelocity(600);
+//    }
+//    intakeMotor.moveVelocity(0);
 }
 void driveForward(double distance) {  
     okapi::IterativePosPIDController drivePID = okapi::IterativeControllerFactory::posPID(0.8, 0., 0.007); //create a new drive object with specified pid

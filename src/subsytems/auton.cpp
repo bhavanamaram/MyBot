@@ -3,7 +3,7 @@
 #include "autonFunctions.hpp"
 bool lockFlywheel=false;
 int count=0;
-int route=3; 
+int route=1; 
 pros::ADIDigitalOut piSton ('H');
 // int target=0;
 /*
@@ -83,29 +83,26 @@ roller();
     rightDrive.moveVelocity(0);
     // driveToPoint(0,0.01,false,1);
     // driveToPoint(0.5,1.4,false,0.9);
-    leftDrive.moveVelocity(-400);  
-    rightDrive.moveVelocity(-400);
-    pros::delay(200);
+    leftDrive.moveVelocity(-300);  
+    rightDrive.moveVelocity(-300);
+    pros::delay(300);
    //roler
-leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
-    rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    pros::delay(700);
-    intakeMotor.moveVelocity(600); //move the roller at max speed
-    pros::delay(700); //wait half a second to allow roller to spin to our color 
-    leftDrive.moveVelocity(0);
-    rightDrive.moveVelocity(0);
-    intakeMotor.moveVelocity(0); //cut everyting besides flywheel
-
+// leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
+//     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
+//     pros::delay(700);
+//     intakeMotor.moveVelocity(600); //move the roller at max speed
+//     pros::delay(700); //wait half a second to allow roller to spin to our color 
+//     leftDrive.moveVelocity(0);
+//     rightDrive.moveVelocity(0);
+//     intakeMotor.moveVelocity(0); //cut everyting besides flywheel
+roller();
    //roller end
     pros::delay(50);
     driveForward(0.5);
     turnToAngle(100);
       intakeMotor.moveVelocity(-600);
-     pros::delay(200);
-      intakeMotor.moveVelocity(0);
-      pros::delay(1000);
-       intakeMotor.moveVelocity(-600);
-     pros::delay(1000); 
+    // intakeMotor.moveVelocity(-600);
+     pros::delay(2000); 
      intakeMotor.moveVelocity(0);
     turnToAngle(0);
     driveForward(0.5);
