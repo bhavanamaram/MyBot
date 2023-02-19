@@ -117,7 +117,7 @@ void driveBackward(double distance, double scalar=1) {
     drive -> getModel() -> tank(0, 0); //stop the drive once target is met
 }
 
-void index( int target){ //turn on indexer at max rpm for 100 ms 
+void index(int target){ //turn on indexer at max rpm for 100 ms 
 while(flywheel.getActualVelocity()>target){ //allow 50 rpm diff
    intakeMotor.moveVelocity(-600);
    pros::delay(1);

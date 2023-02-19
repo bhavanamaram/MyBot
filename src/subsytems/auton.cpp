@@ -15,7 +15,7 @@ route 4 is right ,but only roller
 
 void updateAuton(){    
 // flywheel.moveVoltage(12000);  
-targetTBH=0; //460
+targetTBH=460; //460
 if(route==1){   //swp
        roller();
     driveForward(0.6); //drive foward to prevent clashing into the wal 
@@ -162,13 +162,13 @@ intakeMotor.moveVelocity(0);
  if(route==5){
     roller();
     driveForward(0.6); //drive foward to prevent clashing into the wal 
-    turnToAngle(63.4); 
+    turnToAngle(45); 
     driveForward(4.4);
-    turnToAngle(-30);
+    turnToAngle(-40);
     driveForward(0.75); 
     //shoot 2 (preloads)
      intakeMotor.moveVelocity(-600);
-     pros::delay(2000); //200
+     pros::delay(1500); //200
       intakeMotor.moveVelocity(0);
       pros::delay(1000); //100
        intakeMotor.moveVelocity(-600);
