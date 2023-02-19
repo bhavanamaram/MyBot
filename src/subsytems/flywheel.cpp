@@ -129,6 +129,7 @@ if (signbit(error)!= signbit(prev_error)) { // if zero crossing,
 //   }
 // }
 void TBH(void* ){
+    okapi::Rate rate;
     //flexwheel mass is 117.934grams 
 
 while(true){
@@ -142,6 +143,8 @@ while(true){
 }*/
 //BANG BANG
 while(true){ 
+    
+rate.delay(10_Hz); 
     if(targetTBH>=0){
     if(targetTBH==0){
         flywheel.moveVoltage(0);
@@ -159,7 +162,7 @@ while(true){
     else{
         flywheel.moveVelocity(targetTBH);
     }
-     pros::delay(300);
+  
 }else{
     flywheel.moveVoltage(-12000);
 }

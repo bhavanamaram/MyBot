@@ -3,12 +3,12 @@
 #include <utility>
 okapi::IMU  inertial = IMU(7);
 double initAngle=0;
-double targetF;
+// double targetF;
 double prevPos=0;
 void roller(){
     leftDrive.moveVelocity(-25);//set the drivetrain to move back at 25rpm
     rightDrive.moveVelocity(-25);//we do 25 rpm to reduce the torque needed to do the roller.
-    pros::delay(200);
+    pros::delay(400);
     // intakeMotor.moveVelocity(600); //move the roller at max speed
     // pros::delay(200); //wait half a second to allow roller to spin to our color 
     // leftDrive.moveVelocity(0);
